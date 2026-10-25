@@ -17,7 +17,7 @@ jobs:
       - name: Create project files
         run: |
           mkdir -p app/src/main/java/com/example/soundmeter
-          cat > settings.gradle <<'EOF'
+          cat > settings.gradle << 'EOF'
           pluginManagement {
               repositories {
                   google()
@@ -34,16 +34,16 @@ jobs:
           rootProject.name = "SoundMeter"
           include ':app'
           EOF
-          cat > build.gradle <<'EOF'
+          cat > build.gradle << 'EOF'
           plugins {
               id 'com.android.application' version '8.2.2' apply false
           }
           EOF
-          cat > gradle.properties <<'EOF'
+          cat > gradle.properties << 'EOF'
           android.useAndroidX=false
           org.gradle.jvmargs=-Xmx2g
           EOF
-          cat > app/build.gradle <<'EOF'
+          cat > app/build.gradle << 'EOF'
           plugins {
               id 'com.android.application'
           }
@@ -63,7 +63,7 @@ jobs:
               }
           }
           EOF
-          cat > app/src/main/AndroidManifest.xml <<'EOF'
+          cat > app/src/main/AndroidManifest.xml << 'EOF'
           <?xml version="1.0" encoding="utf-8"?>
           <manifest xmlns:android="http://schemas.android.com/apk/res/android">
               <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -77,7 +77,7 @@ jobs:
               </application>
           </manifest>
           EOF
-          cat > app/src/main/java/com/example/soundmeter/MainActivity.java <<'EOF'
+          cat > app/src/main/java/com/example/soundmeter/MainActivity.java << 'EOF'
           package com.example.soundmeter;
 
           import android.Manifest;
@@ -163,7 +163,7 @@ jobs:
                               double sum = 0;
                               for (int i = 0; i < n; i++) sum += (double) data[i] * data[i];
                               double rms = Math.sqrt(sum / n);
-                              double db = rms > 0 ? 20 * Math.log10(rms / 32768.0) + 90 : 0;
+                              double db = rms > 0 ? 20 * Math.log10(rms / 32768.0) + 110 : 0;
                               if (db < 0) db = 0;
                               if (db > 120) db = 120;
                               final double v = db;
